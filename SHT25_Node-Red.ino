@@ -25,6 +25,7 @@ unsigned long Interval = 5000;
 
 volatile float Ctemp,Ftemp,humid; // using volatile with variable - It tells the compiler that the value of the variable may change at any time--without any action being taken by the code the compiler finds nearby.
 
+// ***Begin the Setup***
 void setup() {
   Wire.begin(2,14);
   Serial.begin(115200);
@@ -33,6 +34,7 @@ void setup() {
   client.setClient(espClient);
   }
 
+//***WIFI Setup*** 
 void setup_wifi() {
   delay(10);
   // We start by connecting to a WiFi network
@@ -53,6 +55,7 @@ void setup_wifi() {
   Serial.println(WiFi.localIP());
 }
 
+//***Pubsub Reconnect Function***
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
@@ -85,7 +88,7 @@ void loop()
     reconnect();
   }
  
-//Mentioned below directly executed in String url
+//***Publish The Sensor Data***
   
   Serial.print("Degree C temperature:");
   Serial.println(String(Ctemp).c_str());
